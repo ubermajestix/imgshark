@@ -33,21 +33,37 @@ Usage
     # => [] 
     
     i.get_url('http://i.imgur.com/onLqO.jpg', 100, 100)
+    # Resizes the image and uploads to S3
     # => "http://s3.amazonaws.com/bucket_of_awesome/onLqO_100X100.jpg" 
     
     i.redis.keys
     # => ["cabf75fecf67c2197e2034aed0e90e36ed899342"] 
     
+    i.get_url('http://i.imgur.com/onLqO.jpg', 100, 100)
+    # Hits the redis cache, insanely fast response.
+    # => "http://s3.amazonaws.com/bucket_of_awesome/onLqO_100X100.jpg"
+    
+    i.redis.keys
+    # => ["cabf75fecf67c2197e2034aed0e90e36ed899342"]
+    
     i.get_url('http://underwaterschoolbus.com/images/Godzilla.gif', 100, 100)
+    # Cache miss! Upload!
     # => "http://s3.amazonaws.com/bucket_of_awesome/images/Godzilla_100X100.gif" 
     
     i.redis.keys
     # => ["cabf75fecf67c2197e2034aed0e90e36ed899342", "c54cc8e5d37b467b943cb6eed8c632c4d1985a9f"] 
    
     i.get_url('http://underwaterschoolbus.com/images/Godzilla.gif', 400, 400)
+    # Cache miss! Upload!
     # => "http://s3.amazonaws.com/bucket_of_awesome/images/Godzilla_400X400.gif" 
     
     i.redis.keys
     # => ["cabf75fecf67c2197e2034aed0e90e36ed899342", "8a5b2e4b49aeda688a9fdc15764e6edf01e10e81", "c54cc8e5d37b467b943cb6eed8c632c4d1985a9f"]
-
+    
+    i.get_url('http://underwaterschoolbus.com/images/Godzilla.gif', 400, 400)
+    # Cache hit!
+    # => "http://s3.amazonaws.com/bucket_of_awesome/images/Godzilla_400X400.gif" 
+    
+    i.redis.keys
+    # => ["cabf75fecf67c2197e2034aed0e90e36ed899342", "8a5b2e4b49aeda688a9fdc15764e6edf01e10e81", "c54cc8e5d37b467b943cb6eed8c632c4d1985a9f"]
 
