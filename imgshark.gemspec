@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'aws-s3',     '~> 0.6.2'
   s.add_dependency 'yajl-ruby',  '~> 1.0.0'
   s.add_dependency 'map',        '~> 4.5.0'
-  s.add_dependency 'http',       '~> 0.0.1', git: "http://github.com/tarcieri/http.git"
+  s.add_dependency 'http',       '~> 0.0.2'
   s.add_dependency 'rmagick',    '~> 2.13.1'
 
   s.add_development_dependency 'rspec', '~> 2.6.0'
