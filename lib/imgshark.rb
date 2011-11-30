@@ -21,7 +21,7 @@ class ImgShark
     redis_url = opts.delete(:redis_url) || ENV['REDISTOGO_URL']
     @redis = redis_url ? Redis.new(redis_url) : Redis.new()
     @json = Yajl::Parser.new
-    @bucket = opts.delete(:amazon_bucket)
+    @bucket = opts.delete(:amazon_bucket) || ENV['AMAZON_BUCKET']
   end
   
   def get_url(url, height, width)
