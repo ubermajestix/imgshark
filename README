@@ -1,0 +1,24 @@
+ImgShark
+========
+Like a shark its, uh, good at resizing and storing images.
+
+Install
+-------
+  
+  gem install imgshark
+  
+Usage
+-----
+
+  require 'imgshark'
+  
+  # You can initialize it manually or use env variables.
+  # The amazon env variables are named the same as the keys below.
+  # The Redis env variable is REDISTOGO_URL so its heroku ready.
+  imgshark = ImgShark.new(amazon_access_key_id: 'somekey', 
+                          amazon_secret_access_key: 'shhhhh', 
+                          redis_url: 'redis://whereisredis:someport/0')
+  
+  imgshark.exists?('http://example.com/example.png', 1, 1) # => false
+  imgshark.upload('http://example.com/example.png', 1, 1, 'aws_bucket_name') # => true
+  imgshark.exists?('http://example.com/example.png', 1, 1) # => true
