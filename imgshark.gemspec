@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "dickburt/version"
+require 'imgshark/version'
 Gem::Specification.new do |s|
   s.name        = "imgshark"
-  s.version     = Dickburt::VERSION
+  s.version     = ImgShark::VERSION
   s.authors     = ["Tyler Montgomery"]
   s.email       = ["tyler@everlater.com"]
   s.homepage    = "http://github.com/ubermajestix/imgshark"
