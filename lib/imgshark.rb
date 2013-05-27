@@ -39,6 +39,7 @@ class ImgShark
   end
   
   def find(key, response_type = {object: true})
+    json = Yajl::Parser.new
     response = redis.get(key)
     if response_type[:object]
       ImgShark::Image.new(self, json.parse(response)) if response && response.kind_of?(String)
@@ -87,7 +88,7 @@ class ImgShark::Image < Map
   end
   
   def filename
-     @filename = url.split('/', 4).last
+     @filename = url.split('?').first.split('/').last
      ext = File.extname(@filename)
      @filename.gsub(ext, "_#{height}X#{width}#{ext}")
   end
@@ -109,7 +110,8 @@ class ImgShark::Image < Map
   end
   
   def on_amazon?
-    Http.head(amazon_url).status == 200
+    #Http.head(amazon_url).status == 200
+    false
   end
   
   def key
